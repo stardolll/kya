@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #fbf3e6;
+    --paper-warm: #f6e9d3;
+    --ink: #4a3350;
+    --ink-soft: #000000;
+    --gold: #cf9f4e;
+    --gold-soft: #e8c583;
+    --pink: #d1a7b87e;
+    --lav: #8c7f9c;
+    --shadow: rgba(45, 22, 55, 0.45);
+    --glow: rgba(255, 214, 140, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse 600px 400px at 15% 20%, rgba(255, 236, 209, 0.4), transparent 55%),
+      radial-gradient(ellipse 500px 350px at 85% 25%, rgba(255, 228, 245, 0.35), transparent 55%),
+      radial-gradient(ellipse 550px 380px at 75% 80%, rgba(255, 218, 195, 0.3), transparent 55%),
+      radial-gradient(ellipse 480px 320px at 20% 85%, rgba(238, 224, 255, 0.28), transparent 55%),
+      radial-gradient(ellipse 700px 500px at 50% 50%, rgba(255, 245, 230, 0.25), transparent 65%),
+      linear-gradient(135deg, #d496a9 0%, #917c64 20%, #af9576be 40%, #a66652 60%, #c4a982be 80%, #aa9c8a 100%);
+    background-attachment: fixed;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    padding: 56px 16px 80px;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff0d6;
+    box-shadow: 0 0 6px 1px rgba(255, 230, 180, 0.9);
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .garland {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    pointer-events: none;
+    line-height: 0;
+  }
+  .garland svg { width: 100%; height: auto; display: block; }
+  .bulb {
+    animation: bulbglow 2.6s ease-in-out infinite;
+  }
+  @keyframes bulbglow {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+
+  .corner-deco {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.95;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+    animation: float 7s ease-in-out infinite;
+  }
+  .corner-deco.tr {
+    top: 10px;
+    right: -20px;
+    width: 300px;
+    animation-delay: 0.5s;
+  }
+  .corner-deco.bl {
+    bottom: -10px;
+    left: -30px;
+    width: 280px;
+    animation-delay: 1.5s;
+  }
+  .corner-deco img { width: 100%; display: block; }
+  .corner-deco::after{
+    content:"";
+    position:absolute;
+    inset: -30px;
+    background: radial-gradient(circle, rgba(255,214,140,0.35), transparent 65%);
+    z-index: -1;
+    filter: blur(6px);
+  }
+
+  .sparkle {
+    position: fixed;
+    z-index: 2;
+    pointer-events: none;
+    color: var(--gold-soft);
+    text-shadow: 0 0 8px rgba(255,214,150,0.8);
+    animation: float 5s ease-in-out infinite, twinkle 3s ease-in-out infinite;
+    font-size: 22px;
+  }
+
+  .sheet {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(255,255,255,0.55), transparent 35%),
+      radial-gradient(circle at 85% 90%, rgba(207,159,78,0.12), transparent 45%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+    border-radius: 18px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.6) inset,
+      0 0 60px 6px var(--glow),
+      0 30px 70px var(--shadow);
+    padding: 48px 34px 56px;
+  }
+
+  .sheet::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1.5px solid rgba(207, 159, 78, 0.45);
+    border-radius: 10px;
+    pointer-events: none;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .glyph {
+    color: var(--gold);
+    font-size: 20px;
+    letter-spacing: 10px;
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 46px);
+    margin: 0 0 8px;
+    letter-spacing: 0.3px;
+    color: var(--ink);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 0 24px rgba(207,159,78,0.25);
+  }
+
+  .sub {
+    font-family: 'Parisienne', cursive;
+    font-size: clamp(21px, 3vw, 28px);
+    color: var(--pink);
+    -webkit-text-stroke: 0.3px var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  .hint {
+    font-size: 16px;
+    color: var(--ink-soft);
+    opacity: 0.85;
+    margin-top: 10px;
+    letter-spacing: 0.2px;
+    font-style: italic;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 24px 14px; }
+    .sheet { padding: 36px 18px 48px; }
+  }
+  @media (max-width: 420px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .frame {
+    background: #fffdf8;
+    padding: 8px 8px 8px;
+    border-radius: 4px;
+    box-shadow: 0 8px 18px rgba(74, 51, 80, 0.28), 0 0 0 1px rgba(207,159,78,0.15);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease;
+    transform: rotate(var(--r, 0deg));
+    position: relative;
+  }
+
+  .frame:nth-child(5n+1){ --r: -1.5deg; }
+  .frame:nth-child(5n+2){ --r: 1deg; }
+  .frame:nth-child(5n+3){ --r: -0.5deg; }
+  .frame:nth-child(5n+4){ --r: 1.5deg; }
+  .frame:nth-child(5n+5){ --r: -1deg; }
+
+  .frame .pic {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #eee;
+    border-radius: 2px;
+  }
+
+  .frame .pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .frame:hover {
+      transform: scale(1.9) rotate(0deg);
+      z-index: 40;
+      box-shadow: 0 30px 55px rgba(74,51,80,0.55), 0 0 30px 6px rgba(255,214,150,0.55);
+    }
+  }
+
+  .frame:active {
+    transform: scale(0.97) rotate(0deg);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 46px;
+    position: relative;
+  }
+
+  footer .cta {
+    font-family: 'Parisienne', cursive;
+    font-size: 25px;
+    color: var(--ink);
+  }
+
+  footer .glyph { margin-top: 8px; margin-bottom: 0; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 16, 38, 0.86);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 100;
+    padding: 24px;
+  }
+
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lightbox img {
+    max-width: min(88vw, 640px);
+    max-height: 82vh;
+    border: 10px solid #fffdf8;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255,214,150,0.35);
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+  }
+
+  .lightbox.open img {
+    transform: scale(1);
+  }
+
+  .lightbox .close {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: var(--ink);
+    font-size: 22px;
+    line-height: 42px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  }
+</style>
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="garland">
+    <svg viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,10 C150,90 300,-10 450,50 C600,100 750,0 900,55 C1000,90 1100,20 1200,45"
+            fill="none" stroke="#caa06a" stroke-width="2" opacity="0.65"/>
+      <g id="bulbsGroup"></g>
+    </svg>
+  </div>
+
+  <div class="corner-deco tr"><img src="fern_tr.png" alt=""></div>
+  <div class="corner-deco bl"><img src="fern_bl.png" alt=""></div>
+
+  <div class="sheet">
+    <header>
+      <div class="glyph">✦ ✧ ✦</div>
+      <h1>Taking Custom Requests</h1>
+      <p class="sub">Chat for more info</p>
+      <p class="hint">✦ Some of my old designs ✦</p>
+    </header>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      <div class="glyph">✦ ✧ ✦</div>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="close" id="closeBtn">&times;</div>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+<script>
+  const total = 25;
+  const grid = document.getElementById('grid');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('closeBtn');
+
+  for (let i = 1; i <= total; i++) {
+    const frame = document.createElement('div');
+    frame.className = 'frame';
+
+    const pic = document.createElement('div');
+    pic.className = 'pic';
+
+    const img = document.createElement('img');
+    img.src = `thumbs/${i}.jpg`;
+    img.loading = 'lazy';
+    img.alt = '';
+
+    pic.appendChild(img);
+    frame.appendChild(pic);
+    frame.dataset.full = `full/${i}.jpg`;
+
+    frame.addEventListener('click', () => {
+      lightboxImg.src = frame.dataset.full;
+      lightbox.classList.add('open');
+    });
+
+    grid.appendChild(frame);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  const starsWrap = document.getElementById('stars');
+  const starCount = 55;
+  for (let i = 0; i < starCount; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 1;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    starsWrap.appendChild(s);
+  }
+
+  const bulbsGroup = document.getElementById('bulbsGroup');
+  const path = document.querySelector('.garland path');
+  const pathLength = path.getTotalLength();
+  const bulbCount = 18;
+  const colors = ['#ffffff', '#ffffff', '#ffffff'];
+  for (let i = 0; i < bulbCount; i++) {
+    const pt = path.getPointAtLength((pathLength / (bulbCount - 1)) * i);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', pt.x);
+    circle.setAttribute('cy', pt.y);
+    circle.setAttribute('r', 4.5);
+    circle.setAttribute('fill', colors[i % colors.length]);
+    circle.classList.add('bulb');
+    circle.style.animationDelay = (i * 0.22) + 's';
+    circle.style.filter = 'drop-shadow(0 0 4px ' + colors[i % colors.length] + ')';
+    bulbsGroup.appendChild(circle);
+  }
+</script>
+
+</body>
+</html>
